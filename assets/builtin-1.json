@@ -1,0 +1,278 @@
+{
+  "id": "builtin-1",
+  "title": "开题申请表",
+  "category": "科研项目",
+  "description": "填写项目基本信息、开题安排和论证专家。原表要求论证专家不少于 3 人。",
+  "file": "template-1.docx",
+  "fields": [
+    {
+      "key": "项目名称",
+      "label": "项目名称",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": true
+    },
+    {
+      "key": "项目编号",
+      "label": "项目编号",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": false
+    },
+    {
+      "key": "立项类型",
+      "label": "立项类型",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": false
+    },
+    {
+      "key": "项目负责人",
+      "label": "项目负责人",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": true
+    },
+    {
+      "key": "立项类别",
+      "label": "立项类别",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": false
+    },
+    {
+      "key": "拟开题方式",
+      "label": "拟开题方式",
+      "group": "基本信息",
+      "default": "集中开题（□线上  □线下）      单独开题（□线上  □线下）",
+      "type": "select",
+      "max_length": 120,
+      "options": [
+        {
+          "label": "暂不勾选",
+          "value": "集中开题（□线上  □线下）      单独开题（□线上  □线下）"
+        },
+        {
+          "label": "集中开题（线上）",
+          "value": "集中开题（☑线上  □线下）      单独开题（□线上  □线下）"
+        },
+        {
+          "label": "集中开题（线下）",
+          "value": "集中开题（□线上  ☑线下）      单独开题（□线上  □线下）"
+        },
+        {
+          "label": "单独开题（线上）",
+          "value": "集中开题（□线上  □线下）      单独开题（☑线上  □线下）"
+        },
+        {
+          "label": "单独开题（线下）",
+          "value": "集中开题（□线上  □线下）      单独开题（□线上  ☑线下）"
+        }
+      ]
+    },
+    {
+      "key": "拟开题时间",
+      "label": "拟开题时间",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "hint": "例如：2026年10月19日（上午）"
+    },
+    {
+      "key": "专家1姓名",
+      "label": "专家1姓名",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家1所属单位",
+      "label": "专家1所属单位",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家1职务职称",
+      "label": "专家1职务职称",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家2姓名",
+      "label": "专家2姓名",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家2所属单位",
+      "label": "专家2所属单位",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家2职务职称",
+      "label": "专家2职务职称",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家3姓名",
+      "label": "专家3姓名",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家3所属单位",
+      "label": "专家3所属单位",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家3职务职称",
+      "label": "专家3职务职称",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家4姓名",
+      "label": "专家4姓名",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家4所属单位",
+      "label": "专家4所属单位",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家4职务职称",
+      "label": "专家4职务职称",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家5姓名",
+      "label": "专家5姓名",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家5所属单位",
+      "label": "专家5所属单位",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家5职务职称",
+      "label": "专家5职务职称",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "签署日期",
+      "label": "签署日期",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "hint": "留空可在打印后手写。"
+    }
+  ],
+  "grids": [
+    {
+      "group": "论证专家",
+      "title": "论证专家（按原表保留 5 行）",
+      "columns": [
+        "姓名",
+        "所属单位",
+        "职务职称"
+      ],
+      "rows": [
+        [
+          "专家1姓名",
+          "专家1所属单位",
+          "专家1职务职称"
+        ],
+        [
+          "专家2姓名",
+          "专家2所属单位",
+          "专家2职务职称"
+        ],
+        [
+          "专家3姓名",
+          "专家3所属单位",
+          "专家3职务职称"
+        ],
+        [
+          "专家4姓名",
+          "专家4所属单位",
+          "专家4职务职称"
+        ],
+        [
+          "专家5姓名",
+          "专家5所属单位",
+          "专家5职务职称"
+        ]
+      ]
+    }
+  ],
+  "previews": [
+    "builtin-1/page-1.png"
+  ]
+}

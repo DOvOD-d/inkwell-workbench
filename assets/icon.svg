@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- 泼墨版应用图标：宣纸底、一坨主墨、飞溅点、一笔扫痕 -->
+  <rect x="4" y="4" width="120" height="120" rx="28" fill="#f7f5ef"/>
+  <path d="M64 25c14 0 22 7 26 17 4 11 12 13 13 22 1 10-8 15-14 21-7 7-16 12-27 11-13-1-21-8-27-18-5-9-11-13-10-23 1-11 10-15 17-22 6-6 12-8 22-8z" fill="#12233a"/>
+  <path d="M52 40c9-4 19-2 24 5 4 6-1 11-6 13-8 3-16 1-20-5-4-6-3-11 2-13z" fill="#2b5c8f"/>
+  <circle cx="97" cy="34" r="6" fill="#12233a"/>
+  <circle cx="107" cy="52" r="3.4" fill="#12233a"/>
+  <circle cx="30" cy="41" r="4.6" fill="#12233a"/>
+  <circle cx="21" cy="63" r="2.8" fill="#12233a"/>
+  <circle cx="41" cy="103" r="5.2" fill="#12233a"/>
+  <circle cx="62" cy="112" r="2.6" fill="#12233a"/>
+  <circle cx="88" cy="99" r="3.6" fill="#12233a"/>
+  <path d="M34 88c14 9 34 11 52 3" fill="none" stroke="#12233a" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+</svg>

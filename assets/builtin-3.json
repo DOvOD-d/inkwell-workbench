@@ -1,0 +1,125 @@
+{
+  "id": "builtin-3",
+  "title": "开题报告书",
+  "category": "科研项目",
+  "description": "正文各栏保留原填表说明。较长内容会自然增加分页，请在生成后检查版式。",
+  "file": "template-3.docx",
+  "fields": [
+    {
+      "key": "项目名称",
+      "label": "项目名称",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": true
+    },
+    {
+      "key": "项目编号",
+      "label": "项目编号",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": false
+    },
+    {
+      "key": "立项类型",
+      "label": "立项类型",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": false
+    },
+    {
+      "key": "立项类别",
+      "label": "立项类别",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": false
+    },
+    {
+      "key": "项目负责人",
+      "label": "项目负责人",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": true
+    },
+    {
+      "key": "承担单位",
+      "label": "承担单位",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": false
+    },
+    {
+      "key": "填报日期",
+      "label": "填报日期",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": false,
+      "hint": "例如：2026年10月19日"
+    },
+    {
+      "key": "研究设计",
+      "label": "研究设计",
+      "group": "正文内容",
+      "default": "",
+      "type": "multiline",
+      "max_length": 2000,
+      "hint": "（基于项目申报书、任务书内容，简要概述项目研究设计，包括研究意义、文献述评、核心概念界定、研究理论基础、研究目标、研究内容、研究方法、预期成果等，限2000字。）"
+    },
+    {
+      "key": "研究实施",
+      "label": "研究实施",
+      "group": "正文内容",
+      "default": "",
+      "type": "multiline",
+      "max_length": 3000,
+      "hint": "（基于项目研究设计框架，具体阐述研究周期内分阶段分步骤开展项目研究的安排，明确每个阶段的研究内容、具体任务清单、研究方法、实施路径、阶段预期研究成果，细化研究人员分工与时间安排；可分阶段分步骤阐述，具备可操作性，不得笼统表述。开题论证后，根据专家组指导意见修改完善，限3000字。）"
+    },
+    {
+      "key": "研究保障",
+      "label": "研究保障",
+      "group": "正文内容",
+      "default": "",
+      "type": "multiline",
+      "max_length": 500,
+      "hint": "（基于本项目研究实施要求，具体阐述如何保障项目研究顺利开展，包括课题组在组织管理、经费预算使用、条件设施等方面的保障情况，限500字。）"
+    },
+    {
+      "key": "研究说明",
+      "label": "研究说明",
+      "group": "正文内容",
+      "default": "",
+      "type": "multiline",
+      "max_length": 2000,
+      "hint": "（基于项目申报书、任务书内容或开题论证专家指导意见，在研究实施过程中说明需要变更和补充的事项，原则上项目名称、负责人及成员开题时不得变更，如无此情况说明填“无”。）"
+    }
+  ],
+  "grids": [],
+  "underline_widths": {
+    "项目名称": 29,
+    "项目编号": 57,
+    "立项类型": 89,
+    "立项类别": 59,
+    "项目负责人": 29,
+    "承担单位": 90,
+    "填报日期": 29
+  },
+  "previews": [
+    "builtin-3/page-1.png",
+    "builtin-3/page-2.png",
+    "builtin-3/page-3.png",
+    "builtin-3/page-4.png"
+  ]
+}

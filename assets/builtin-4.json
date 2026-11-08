@@ -1,0 +1,418 @@
+{
+  "id": "builtin-4",
+  "title": "开题结果报告",
+  "category": "科研项目",
+  "description": "填写开题结论、实施改进、开题简报和反馈意见。专家签名与盖章保留为手签区域。",
+  "file": "template-4.docx",
+  "fields": [
+    {
+      "key": "项目名称",
+      "label": "项目名称",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": true
+    },
+    {
+      "key": "项目编号",
+      "label": "项目编号",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": false
+    },
+    {
+      "key": "立项类型",
+      "label": "立项类型",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": false
+    },
+    {
+      "key": "立项类别",
+      "label": "立项类别",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": false
+    },
+    {
+      "key": "项目负责人",
+      "label": "项目负责人",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": true
+    },
+    {
+      "key": "承担单位",
+      "label": "承担单位",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": false
+    },
+    {
+      "key": "填报日期",
+      "label": "填报日期",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "required": false,
+      "hint": "例如：2026年10月19日"
+    },
+    {
+      "key": "开题方式",
+      "label": "开题方式",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "hint": "例如：集中开题（线下）"
+    },
+    {
+      "key": "开题时间",
+      "label": "开题时间",
+      "group": "基本信息",
+      "default": "",
+      "type": "text",
+      "max_length": 120
+    },
+    {
+      "key": "专家1姓名",
+      "label": "专家1姓名",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家1所属单位",
+      "label": "专家1所属单位",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家1职务职称",
+      "label": "专家1职务职称",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家2姓名",
+      "label": "专家2姓名",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家2所属单位",
+      "label": "专家2所属单位",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家2职务职称",
+      "label": "专家2职务职称",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家3姓名",
+      "label": "专家3姓名",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家3所属单位",
+      "label": "专家3所属单位",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家3职务职称",
+      "label": "专家3职务职称",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家4姓名",
+      "label": "专家4姓名",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家4所属单位",
+      "label": "专家4所属单位",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家4职务职称",
+      "label": "专家4职务职称",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家5姓名",
+      "label": "专家5姓名",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家5所属单位",
+      "label": "专家5所属单位",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "专家5职务职称",
+      "label": "专家5职务职称",
+      "group": "论证专家",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "grid": "论证专家（按原表保留 5 行）"
+    },
+    {
+      "key": "论证结论",
+      "label": "论证结论",
+      "group": "开题结论",
+      "default": "□通过 □修改后通过 □不通过",
+      "type": "select",
+      "max_length": 120,
+      "options": [
+        {
+          "label": "暂不勾选",
+          "value": "□通过 □修改后通过 □不通过"
+        },
+        {
+          "label": "通过",
+          "value": "☑通过 □修改后通过 □不通过"
+        },
+        {
+          "label": "修改后通过",
+          "value": "□通过 ☑修改后通过 □不通过"
+        },
+        {
+          "label": "不通过",
+          "value": "□通过 □修改后通过 ☑不通过"
+        }
+      ]
+    },
+    {
+      "key": "专家到会情况",
+      "label": "专家到会情况",
+      "group": "开题结论",
+      "default": "",
+      "type": "text",
+      "max_length": 120,
+      "hint": "例如：（专家应到 3 人，实到 3 人）"
+    },
+    {
+      "key": "实施改进",
+      "label": "实施改进",
+      "group": "正文内容",
+      "default": "",
+      "type": "multiline",
+      "max_length": 2000,
+      "hint": "（基于项目开题论证专家指导意见，通过梳理并讨论，综合陈述专家组提出的主要问题和具体指导意见建议、项目研究实施改进具体内容与主要措施等方面，要求具体明确、可操作，限2000字。）"
+    },
+    {
+      "key": "研究说明",
+      "label": "研究说明",
+      "group": "正文内容",
+      "default": "",
+      "type": "multiline",
+      "max_length": 2000,
+      "hint": "（根据项目申报书及任务书内容和开题论证专家指导意见，在研究实施过程中说明需要变更和补充的事项；如有变更需提交项目研究变更申请表，按项目管理流程审批同意方可有效；如无此情况说明填“无”。）"
+    },
+    {
+      "key": "开题简报",
+      "label": "开题简报",
+      "group": "正文内容",
+      "default": "",
+      "type": "multiline",
+      "max_length": 800,
+      "hint": "（按照简报规范格式和内容要素，形成项目开题简报，可附1-2张开题论证会照片一并提交，限800字。）"
+    },
+    {
+      "key": "意见针对性、建设性、可操作性",
+      "label": "意见针对性、建设性、可操作性",
+      "group": "反馈意见",
+      "default": "专家组论证指导意见是否有针对性、建设性、可操作性：□是  □否",
+      "type": "select",
+      "max_length": 120,
+      "options": [
+        {
+          "label": "暂不勾选",
+          "value": "专家组论证指导意见是否有针对性、建设性、可操作性：□是  □否"
+        },
+        {
+          "label": "是",
+          "value": "专家组论证指导意见是否有针对性、建设性、可操作性：☑是  □否"
+        },
+        {
+          "label": "否",
+          "value": "专家组论证指导意见是否有针对性、建设性、可操作性：□是  ☑否"
+        }
+      ]
+    },
+    {
+      "key": "指导总体效果",
+      "label": "指导总体效果",
+      "group": "反馈意见",
+      "default": "专家组论证指导总体效果是否满意：□满意  □一般  □不满意",
+      "type": "select",
+      "max_length": 120,
+      "options": [
+        {
+          "label": "暂不勾选",
+          "value": "专家组论证指导总体效果是否满意：□满意  □一般  □不满意"
+        },
+        {
+          "label": "满意",
+          "value": "专家组论证指导总体效果是否满意：☑满意  □一般  □不满意"
+        },
+        {
+          "label": "一般",
+          "value": "专家组论证指导总体效果是否满意：□满意  ☑一般  □不满意"
+        },
+        {
+          "label": "不满意",
+          "value": "专家组论证指导总体效果是否满意：□满意  □一般  ☑不满意"
+        }
+      ]
+    },
+    {
+      "key": "修改是否体现专家意见",
+      "label": "修改是否体现专家意见",
+      "group": "反馈意见",
+      "default": "任务书及开题报告书修改是否体现专家论证指导意见：□是  □否",
+      "type": "select",
+      "max_length": 120,
+      "options": [
+        {
+          "label": "暂不勾选",
+          "value": "任务书及开题报告书修改是否体现专家论证指导意见：□是  □否"
+        },
+        {
+          "label": "是",
+          "value": "任务书及开题报告书修改是否体现专家论证指导意见：☑是  □否"
+        },
+        {
+          "label": "否",
+          "value": "任务书及开题报告书修改是否体现专家论证指导意见：□是  ☑否"
+        }
+      ]
+    },
+    {
+      "key": "其他反馈意见",
+      "label": "其他反馈意见",
+      "group": "反馈意见",
+      "default": "",
+      "type": "multiline",
+      "max_length": 1000
+    }
+  ],
+  "grids": [
+    {
+      "group": "论证专家",
+      "title": "论证专家（按原表保留 5 行）",
+      "columns": [
+        "姓名",
+        "所属单位",
+        "职务职称"
+      ],
+      "rows": [
+        [
+          "专家1姓名",
+          "专家1所属单位",
+          "专家1职务职称"
+        ],
+        [
+          "专家2姓名",
+          "专家2所属单位",
+          "专家2职务职称"
+        ],
+        [
+          "专家3姓名",
+          "专家3所属单位",
+          "专家3职务职称"
+        ],
+        [
+          "专家4姓名",
+          "专家4所属单位",
+          "专家4职务职称"
+        ],
+        [
+          "专家5姓名",
+          "专家5所属单位",
+          "专家5职务职称"
+        ]
+      ]
+    }
+  ],
+  "underline_widths": {
+    "项目名称": 29,
+    "项目编号": 57,
+    "立项类型": 89,
+    "立项类别": 59,
+    "项目负责人": 29,
+    "承担单位": 90,
+    "填报日期": 29
+  },
+  "previews": [
+    "builtin-4/page-1.png",
+    "builtin-4/page-2.png",
+    "builtin-4/page-3.png",
+    "builtin-4/page-4.png"
+  ]
+}
