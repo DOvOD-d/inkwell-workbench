@@ -27,8 +27,23 @@ AI 功能时才会联网。
 assets/             内置模板、图标与库预览图
 skill/              word-template-filler 技能包
 Word模板工作台.spec  PyInstaller 打包配置
-release/            打包好的 exe 与说明
+release/            打包好的 exe、技能包、示例、许可与说明
 ```
+
+## 发布内容（v1.0.3）
+
+`release/` 收录最新精简交付包中可入库的部分：
+
+- `Word模板工作台_v1.0.3.exe`：单文件主程序。
+- `使用说明-先看这里.txt`：版本变更与使用提示。
+- `word-template-filler.skill`：可直接安装到 Qoder 的技能包。
+- `示例/`：3 份演示模板。
+- `AI_LICENSE_*.txt`：随程序分发的第三方组件许可。
+- `SHA256SUMS.txt`：发布文件校验和。
+
+`ai_models/` 与 `ai_runtime/` 不入库：内置模型约 378 MB，超过 GitHub 单文件 100 MB 限制。
+需要离线 AI 时，把 Qwen3-0.6B 的 `.gguf` 放进 `ai_models/`、llama.cpp 运行库放进 `ai_runtime/`，
+与 exe 同级即可；也可以直接使用 Ollama 或在线模型。
 
 ## 运行与构建
 
