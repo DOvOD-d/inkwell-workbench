@@ -21,6 +21,7 @@ from __future__ import annotations
 import re
 
 from docx import Document
+from docx.table import _Cell
 
 import exampleparse as ep
 
@@ -303,8 +304,8 @@ def _table_contexts(doc, title):
 
 
 def _add_simple(fields, used, ti, ri, label_cell, value_cell, label_ci, value_ci,
-                prefix, context):
-    label = _clean_label(label_cell.text)
+                prefix, context, label_text=None, group_override=None, allow_red=False):
+    label = _clean_label(label_text if label_text is not None else (label_cell.text if label_cell else ''))
     if not label:
         return None
     if '题目（中文）' in label or '中文题目' in label:
@@ -317,7 +318,7 @@ def _add_simple(fields, used, ti, ri, label_cell, value_cell, label_ci, value_ci
         return None
     if value_cell is None:
         return None
-    if ep._red_only(value_cell):
+    if ep._red_only(value_cell) and not allow_red:
         return None
     value_text = value_cell.text
     preserve_suffix = bool(
@@ -334,7 +335,8 @@ def _add_simple(fields, used, ti, ri, label_cell, value_cell, label_ci, value_ci
     field = {
         'plan_id': fid, 'key': key, 'label': label,
         'type': 'text', 'required': True,
-        'group': (_group_for_multi(context, label) if prefix else _group_for_single(label, context)),
+        'group': (group_override or
+                  (_group_for_multi(context, label) if prefix else _group_for_single(label, context))),
         'mode': 'cell', 'table': ti, 'row': ri, 'col': value_ci, 'p': 0,
         'location': {'kind': 'cell', 'table': ti, 'row': ri, 'col': value_ci, 'p': 0},
         'where': f'表{ti + 1} 行{ri + 1} 列{value_ci + 1}',
@@ -555,6 +557,202 @@ def _add_section(fields, used, recipes, ti, ri, ci, cell, context, prefix,
                       if q != title_i and all(f':{q}' not in x for x in recipe['order'])]
 
 
+def _raw_grid(table):
+    widths = [int(el.get(ep.qn('w:w')) or 0)
+              for el in table._tbl.tblGrid.findall(ep.qn('w:gridCol'))]
+    rows = []
+    for ri, tr in enumerate(table._tbl.tr_lst):
+        col = 0
+        recs = []
+        for tc in tr.tc_lst:
+            span = 1
+            tcpr = tc.tcPr
+            if tcpr is not None:
+                gs = tcpr.find(ep.qn('w:gridSpan'))
+                if gs is not None:
+                    span = int(gs.get(ep.qn('w:val')) or 1)
+            vm = ''
+            if tcpr is not None:
+                el = tcpr.find(ep.qn('w:vMerge'))
+                if el is not None:
+                    vm = el.get(ep.qn('w:val')) or 'continue'
+            cell = _Cell(tc, table)
+            recs.append({
+                'tc': tc, 'cell': cell, 'row': ri, 'col': col, 'span': span,
+                'vm': vm, 'text': cell.text.strip(),
+                'width': sum(widths[col:col + span]),
+            })
+            col += span
+        rows.append(recs)
+    return rows
+
+
+def _grid_restart(rows, ri, col):
+    for r in range(ri, -1, -1):
+        for rec in rows[r]:
+            if rec['col'] <= col < rec['col'] + rec['span'] and rec['vm'] != 'continue':
+                return rec
+    return None
+
+
+def _grid_text(rows, rec):
+    if rec['vm'] == 'continue':
+        root = _grid_restart(rows, rec['row'], rec['col'])
+        return root['text'] if root else ''
+    return rec['text']
+
+
+def _grid_left(row, rec):
+    for other in row:
+        if other['col'] + other['span'] == rec['col']:
+            return other
+    return None
+
+
+def _grid_above(rows, ri, rec):
+    if ri <= 0:
+        return None
+    for other in rows[ri - 1]:
+        if other['col'] <= rec['col'] < other['col'] + other['span']:
+            return _grid_restart(rows, ri - 1, rec['col'])
+    return None
+
+
+def _colored_value(cell):
+    for p in cell.paragraphs:
+        for r in p.runs:
+            if not r.text.strip():
+                continue
+            color = ep._run_color(r)
+            if color and color.upper() not in ('000000', 'AUTO') and not ep._is_red(color):
+                return True
+    return False
+
+
+def _grid_value(rec):
+    text = rec['text'].strip()
+    if not text:
+        return True
+    if '{{' in text and '}}' in text:
+        return True
+    return _colored_value(rec['cell'])
+
+
+def _grid_group(rows, row):
+    first = next((_grid_text(rows, r) for r in row if _grid_text(rows, r)), '')
+    for key in ('德育', '智育', '体育', '美育', '劳育'):
+        if key in first:
+            return key
+    if any(k in first for k in ('加分', '减分', '综评', '排名')):
+        return '综评'
+    if any(k in first for k in ('姓名', '性别', '学院', '年级', '班级')):
+        return '基本信息'
+    return None
+
+
+def _grid_headers(rows, row, before_col):
+    texts = [(r['col'], _grid_text(rows, r)) for r in row]
+    texts = [(c, t) for c, t in texts if t and c < before_col]
+    sem = next((t for _c, t in texts if '学期' in t), '')
+    rh = texts[-1][1] if texts else ''
+    return sem, rh
+
+
+BASIC_LABELS = {
+    '姓名', '学生姓名', '性别', '民族', '出生年月', '出生日期', '政治面貌',
+    '学院', '所在学院', '年级', '班级', '专业', '学号', '联系电话', '电话',
+    '手机', '手机号', 'QQ', 'QQ号', '邮箱', '电子邮箱', '指导教师',
+    '指导教师姓名', '职称', '学位', '职称学位', '题目', '论文题目', '中文题目',
+    '外文题目', '题目来源', '开题时间', '日期', '填表日期', '身份证号',
+    '身份证号码', '第一意向', '第二意向', '意向', '意向部门', '籍贯',
+}
+
+
+def _add_filled_basic_fields(fields, used, table, ti, prefix, context):
+    """Filled names/colleges/dates already present in a form can still be replaced."""
+    rows = _raw_grid(table)
+    occupied = set()
+    for field in fields:
+        loc = field.get('location') or {}
+        if loc.get('kind') == 'cell' and loc.get('table') == ti:
+            occupied.add((loc.get('row'), loc.get('col')))
+    for ri, row in enumerate(rows):
+        for rec in row:
+            if rec['vm'] == 'continue' or rec['width'] < 200:
+                continue
+            left = _grid_left(row, rec)
+            if left is None:
+                continue
+            label = _clean_label(_grid_text(rows, left))
+            if label not in BASIC_LABELS:
+                continue
+            value = rec['text'].strip()
+            if not value or '{{' in value and '}}' in value or _colored_value(rec['cell']):
+                continue
+            if _clean_label(value) in BASIC_LABELS:
+                continue
+            if any(k in value for k in ('签名', '公章', '年   月', '年 月', '÷', '×')):
+                continue
+            if any(k in value for k in ('请填写', '请输入', '此处填写', '说明：', '格式：', '注意：')):
+                continue
+            if (ri, rec['col']) in occupied:
+                continue
+            _add_simple(fields, used, ti, ri, None, rec['cell'], 0, rec['col'],
+                        prefix, context, label_text=label, group_override='基本信息',
+                        allow_red=True)
+            occupied.add((ri, rec['col']))
+
+
+def _add_grid_value_fields(fields, used, table, ti, handled_rows, prefix, context):
+    rows = _raw_grid(table)
+    seen = set()
+    for ri, row in enumerate(rows):
+        if ri in handled_rows:
+            continue
+        values = [r for r in row if r['vm'] != 'continue' and _grid_value(r)]
+        if not values:
+            continue
+        lefts = [_grid_left(row, r) for r in values]
+        left_texts = [_grid_text(rows, l) if l else '' for l in lefts]
+        sem, rh = _grid_headers(rows, row, values[0]['col'])
+        shared = sum(1 for l in left_texts if not l or l == rh)
+        grid = len(values) >= 3 and bool(rh) and shared >= 2
+        group = _grid_group(rows, row)
+        index = 0
+        for rec, left, left_text in zip(values, lefts, left_texts):
+            if id(rec['tc']) in seen:
+                continue
+            above = _grid_above(rows, ri, rec)
+            above_text = _grid_text(rows, above) if above else ''
+            label = ''
+            if grid:
+                specific_above = bool(
+                    above_text and above and above['span'] <= rec['span']
+                    and above_text != rh
+                    and any(k in above_text for k in ('平均分', '总分', '得分', '成绩'))
+                )
+                if specific_above:
+                    label = above_text
+                elif left_text and left_text != rh and not _grid_value(left):
+                    label = left_text
+                else:
+                    index += 1
+                    label = f'{sem}{rh}{index}'.strip()
+            else:
+                if left_text and not _grid_value(left):
+                    label = left_text
+                elif above_text and not _grid_value(above):
+                    label = above_text
+            if not label:
+                continue
+            label = re.sub(r'\s+', '', label)
+            if any(w in label for w in SIGN_WORDS):
+                continue
+            seen.add(id(rec['tc']))
+            _add_simple(fields, used, ti, ri, None, rec['cell'], 0, rec['col'],
+                        prefix, context, label_text=label, group_override=group)
+
+
 def analyze(path):
     path = str(path)
     doc = Document(path)
@@ -565,11 +763,13 @@ def analyze(path):
     contexts = _table_contexts(doc, title)
     fields, recipes, clear_cells = [], [], []
     used = set()
+    handled_rows_by_table = {}
 
     for ti, table in enumerate(doc.tables):
         ctx = contexts[ti] if ti < len(contexts) else {'prefix': f'表{ti + 1}_', 'context': f'表{ti + 1}'}
         prefix, context = ctx['prefix'], ctx['context']
         handled_rows = set()
+        handled_rows_by_table[ti] = handled_rows
         for ri, row in enumerate(table.rows):
             cells = ep._unique_cells(row)
             if not cells:
@@ -591,24 +791,13 @@ def analyze(path):
                 _add_section(fields, used, recipes, ti, ri, ci, cell, context, prefix)
                 handled_rows.add(ri)
                 continue
-            # label/value pairs
-            start = 0
-            if len(cells) >= 3 and _vmerge(cells[0][1]) == 'restart':
-                start = 1
-            i = start
-            while i < len(cells):
-                _, label_cell = cells[i]
-                if not _norm(label_cell.text):
-                    i += 1
-                    continue
-                if i + 1 >= len(cells):
-                    break
-                value_ci, value_cell = cells[i + 1]
-                result = _add_simple(fields, used, ti, ri, label_cell, value_cell,
-                                     cells[i][0], value_ci, prefix, context)
-                if result and result[0] == 'clear':
-                    clear_cells.append([result[1], result[2], result[3]])
-                i += 2
+            # label/value pairs are resolved from the real grid after the row loop
+
+    for ti, table in enumerate(doc.tables):
+        ctx = contexts[ti] if ti < len(contexts) else {'prefix': f'表{ti + 1}_', 'context': f'表{ti + 1}'}
+        _add_grid_value_fields(fields, used, table, ti, handled_rows_by_table.get(ti, set()),
+                               ctx['prefix'], ctx['context'])
+        _add_filled_basic_fields(fields, used, table, ti, ctx['prefix'], ctx['context'])
 
     if not fields:
         raise ValueError('没有识别到可填写栏目。\n'
@@ -620,7 +809,9 @@ def analyze(path):
                    '指导记录': 10, '指导记录·评语成绩': 11,
                    '基本信息': 0, '论文题目': 1, '开题信息': 2, '选题论证': 3,
                    '研究内容': 4, '进度安排': 5, '参考文献': 6, '正文': 7,
-                   '指导教师意见': 8, '落款': 9, '填写内容': 10, '其他': 11}
+                   '指导教师意见': 8, '落款': 9,
+                   '德育': 11, '智育': 12, '体育': 13, '美育': 14, '劳育': 15,
+                   '综评': 16, '填写内容': 20, '其他': 21}
     fields.sort(key=lambda f: (group_order.get(f['group'], 50),
                                int(f['plan_id'][2:]) if f['plan_id'][2:].isdigit() else 0))
     description = (f'由表单结构识别生成，共 {len(fields)} 个填写项；'

@@ -59,7 +59,7 @@ import visionparse
 from engine import read_json, write_json, render_word, scan_fields, validate_values
 
 ASSETS = Path(__file__).resolve().parent / 'assets'
-VERSION = '1.0.3'
+VERSION = '1.0.5'
 # 自动排版和“删说明搬提示”不再暴露开关，始终执行。
 REQ_OPTIONS = {'apply_format': True, 'remove_notes': True}
 CN_SIZES = [('初号', 42), ('小初', 36), ('一号', 26), ('小一', 24), ('二号', 22), ('小二', 18),
